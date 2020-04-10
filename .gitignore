@@ -1,0 +1,17 @@
+# whitelist; track only build directories
+*
+!.gitignore
+
+# exercise lists
+!data/
+!data/*.txt
+!data/*.csv
+
+# bash build
+!bash/
+!bash/*.sh
+
+# python build
+!python/
+!python/*.py
+
