@@ -1,17 +1,5 @@
-# whitelist; track only build directories
-*
-!.gitignore
+# Mac system
+.DS_Store
 
-# exercise lists
-!data/
-!data/*.txt
-!data/*.csv
-
-# bash build
-!bash/
-!bash/*.sh
-
-# python build
-!python/
-!python/*.py
-
+# React-native
+abs_mobile/node_modules/
