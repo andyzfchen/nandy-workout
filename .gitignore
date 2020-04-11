@@ -1,5 +1,6 @@
 # Mac system
 .DS_Store
+*.swp
 
 # React-native
 abs_mobile/node_modules/
