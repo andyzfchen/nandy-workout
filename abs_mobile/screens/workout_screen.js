@@ -54,7 +54,7 @@ export default class WorkoutScreen extends Component {
 	var counter = this.state.counter
     return (
       <View style={styles.container}>
-		<Text style={styles.preview_text}> {this.state.counter} </Text>
+		{/* <Text style={styles.preview_text}> {this.state.counter} </Text> */}
 		{preview}
         <Text style={styles.workout_text}> {this.state.workout} </Text>
         <CountDown
