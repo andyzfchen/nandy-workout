@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import CountDown from 'react-native-countdown-component';
+
 
 export default class TestScreen extends Component {
   constructor(props) {
@@ -10,8 +10,9 @@ export default class TestScreen extends Component {
   }
 
   render() {
+    const cusdata = require('../resources/workouts.json');
     return (
-      <Text> text placeholder </Text>
+      <Text> {cusdata[20].name} </Text>
     );
   }
 }

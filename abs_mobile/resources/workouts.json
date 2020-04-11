@@ -1,0 +1,119 @@
+{
+    0: {
+        "name":"crunches"
+    },
+    1: {
+        "name":"elevated crunches"
+    },
+    2: {
+        "name":"hundreds"
+    },
+    3: {
+        "name":"high crunches"
+    },
+    4: {
+        "name":"sit ups"
+    },
+    5: {
+        "name":"long arm crunches"
+    },
+    6: {
+        "name":"toe touches"
+    },
+    7: {
+        "name":"reverse crunches"
+    },
+    8: {
+        "name":"scissor kicks"
+    },
+    9: {
+        "name":"leg raises"
+    },
+    10: {
+        "name":"pulse ups"
+    },
+    11: {
+        "name":"crunch kicks"
+    },
+    12: {
+        "name":"bicycle crunches"
+    },
+    13: {
+        "name":"six inch hold"
+    },
+    14: {
+        "name":"flutter kicks"
+    },
+    15: {
+        "name":"elbow plank"
+    },
+    16: {
+        "name":"L sit"
+    },
+    17: {
+        "name":"star plank"
+    },
+    18: {
+        "name":"hollow hold"
+    },
+    19: {
+        "name":"V ups"
+    },
+    20: {
+        "name":"in and out abs"
+    },
+    21: {
+        "name":"banana boat"
+    },
+    22: {
+        "name":"mason twists"
+    },
+    23: {
+        "name":"twisting crunches"
+    },
+    24: {
+        "name":"side jack knives"
+    },
+    25: {
+        "name":"sitting toe taps"
+    },
+    26: {
+        "name":"sitting punches"
+    },
+    27: {
+        "name":"knee to elbow"
+    },
+    28: {
+        "name":"sitting knee to elbow"
+    },
+    29: {
+        "name":"dead bug"
+    },
+    30: {
+        "name":"plank crunches"
+    },
+    31: {
+        "name":"side plank crunches"
+    },
+    32: {
+        "name":"rotating V ups"
+    },
+    33: {
+        "name":"bent leg twists"
+    },
+    34: {
+        "name":"arm/leg raises"
+    },
+    35: {
+        "name":"long leg twists"
+    },
+    36: {
+        "name":"plank rolls"
+    },
+    37: {
+        "name":"knee in twists"
+    },
+    38: {
+        "name":"climber taps"
+    }
+}
