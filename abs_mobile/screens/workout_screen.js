@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import CountDown from 'react-native-countdown-component';
+import { THEME_BLUE } from '../styles/main_style';
 
 export default class WorkoutScreen extends Component {
   constructor(props) {
@@ -11,7 +13,16 @@ export default class WorkoutScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> workout_screen placeholder </Text>
+        <Text style={{marginBottom:40}}> workout text placeholder </Text>
+        <CountDown
+            until={10}
+            timeToShow={['S']}
+            timeLabels={{s: null}}
+            digitStyle={{backgroundColor: THEME_BLUE}}
+            digitTxtStyle={{color: '#FFF'}}
+            onFinish={() => alert('finished')}
+            size={60}
+      />
       </View>
     );
   }

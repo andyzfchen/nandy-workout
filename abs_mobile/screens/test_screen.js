@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import CountDown from 'react-native-countdown-component';
 
 export default class TestScreen extends Component {
   constructor(props) {
@@ -10,9 +11,7 @@ export default class TestScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text> test_screen </Text>
-      </View>
+      <Text> text placeholder </Text>
     );
   }
 }
