@@ -3,4 +3,4 @@
 *.swp
 
 # React-native
-abs_mobile/node_modules/
+abs_mobile/node_modules
