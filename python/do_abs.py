@@ -76,7 +76,7 @@ time.sleep(2)
 
 
 # Loads exercises
-exercises = np.genfromtxt('../data/abs_exercises.csv', dtype=str, delimiter=',')
+exercises = np.genfromtxt('../resources/abs_exercises.csv', dtype=str, delimiter=',')
 N_tot = np.shape(exercises)[0]
 print("Total possible exercises: %d" % N_tot)
 

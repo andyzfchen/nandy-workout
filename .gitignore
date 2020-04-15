@@ -2,5 +2,10 @@
 .DS_Store
 *.swp
 
+# python
+python/mp3_cache
+
 # React-native
 abs_mobile/node_modules
+node_modules
+.expo

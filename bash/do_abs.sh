@@ -86,7 +86,7 @@ N_tot=0
 while IFS= read -r line; do
   arr+=("$line")
   ((N_tot++))
-done < abs_exercises.txt
+done < ../resources/abs_exercises.txt
 echo "Total possible exercises: $N_tot"
 
 shuffle $N_tot
