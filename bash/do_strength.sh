@@ -57,6 +57,7 @@ shuffle() {
 
 
 time=$1
+type=$2
 
 
 # Starting sequence
@@ -68,6 +69,8 @@ say "$time minutes."
 sleep 2
 echo
 
+echo "../resources/${type}_exercises.txt"
+
 
 # Load in exercises
 arr=()
@@ -75,7 +78,7 @@ N_tot=0
 while IFS= read -r line; do
   arr+=("$line")
   ((N_tot++))
-done < ../resources/abs_exercises.txt
+done < ../resources/${type}_exercises.txt
 echo "Total possible exercises: $N_tot"
 
 shuffle $N_tot
