@@ -56,57 +56,58 @@ shuffle() {
 }
 
 
-time=$1
+nSet=$1
 type=$2
 
 
 # Starting sequence
 echo "App is starting."
-echo "Duration: $time mins"
+echo "Duration: $nSet sets"
 
-say "Starting abdominal exercises."
-say "$time minutes."
+say "Starting strength exercises."
+say "$nSet sets."
 sleep 2
 echo
-
-echo "../resources/${type}_exercises.txt"
 
 
 # Load in exercises
 arr=()
-N_tot=0
+nLevel=(0 0 0)
+nTot=0
+level=0
 while IFS= read -r line; do
-  arr+=("$line")
-  ((N_tot++))
+  if [ -z "$line" ]
+  then
+    ((level++))
+  else
+    arr+=("$line")
+    ((nLevel[$level]++))
+    ((nTot++))
+  fi
 done < ../resources/${type}_exercises.txt
-echo "Total possible exercises: $N_tot"
+echo "Easy exercises: ${nLevel[0]}"
+echo "Medium exercises: ${nLevel[1]}"
+echo "Hard exercises: ${nLevel[2]}"
+echo "Total possible exercises: $nTot"
 
-shuffle $N_tot
+shuffle $nTot
 
-N_exercise=$(($1*2))
-echo "Total session exercises: $N_exercise"
+N_exercise=$(($1*4))
 echo
 
-
+exit
 
 # Workout sequence
 for (( j=0; j<N_exercise; j++))
 do
-  if [ $((j % 6)) -eq 5 ]
+  if [ $((j % 4)) -eq 0 ]
   then
-    echo "break time"
-    breaktime
 
-    if [ $((j+1)) -eq $N_exercise ]
-    then
-      :
-    else
-      echo "Next exercise: ${arr[${arr1[$((j+1))]}]}" 
-      next_exercise "${arr[${arr1[$((j+1))]}]}"
-    fi
+  elif [ $((j % 4)) -eq 1 ]
+  then
 
-    countdown 10
-  else
+  elif [ $((j % 4)) -eq 2 ]
+  then
     echo "Current exercise: ${arr[${arr1[$j]}]}"
     exercise_start "${arr[${arr1[$j]}]}"
     exercise
@@ -124,6 +125,22 @@ do
     fi
 
     countdown 10
+  elif [ $((j % 4)) -eq 3 ]
+    echo "break time"
+    breaktime
+
+    if [ $((j+1)) -eq $N_exercise ]
+    then
+      :
+    else
+      echo "Next exercise: ${arr[${arr1[$((j+1))]}]}" 
+      next_exercise "${arr[${arr1[$((j+1))]}]}"
+    fi
+
+    countdown 10
+  then
+  else
+    :
   fi
 done
 

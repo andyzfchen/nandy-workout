@@ -1,9 +1,6 @@
 half bridge
 bridge raises
-single bridge raises
 arm leg raises
-donkey kicks
-
 T superman
 W superman
 V superman
