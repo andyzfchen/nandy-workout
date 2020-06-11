@@ -25,8 +25,18 @@ player.gen_all_exercise_mp3()
 
 player.randomizeExercise()
 
-rep = 0
 for j in range(player.nInt):
+  diff = player.eDifficulty[j%player.eIpS]
+  iexer = player.counter[diff]%player.nDiff[diff]
+  player.counter[diff] += 1
+  nextdiff = player.eDifficulty[(j+1)%player.eIpS]
+  inextexer = player.counter[nextdiff]%player.nDiff[diff]
+  player.counter[diff] -= 1
+  print(diff)
+  print(iexer)
+  print(nextdiff)
+  print(inextexer)
+
   # breaktime
   if ((j%(player.eRpS+1))==player.eRpS):
     # normal break
@@ -35,22 +45,22 @@ for j in range(player.nInt):
 
     # not last interval
     if ((j+1)!=player.nInt):
-      print("Next exercise: %s" % player.arrExer[player.eDifficulty[rep%player.eRpS]][rep][0])
-      player.ex_next(player.arrExer[player.eDifficulty[rep%player.eRpS]][rep][0])
+      print("Next exercise: %s" % player.arrExer[nextdiff][inextexer][0])
+      player.ex_next(player.arrExer[nextdiff][inextexer][0])
 
     player.ex_countdown()
 
   # exercise
   else:
-    print("Current exercise: %s" % player.arrExer[player.eDifficulty[rep%player.eRpS]][rep][0])
-    player.ex_start(player.arrExer[player.eDifficulty[rep%player.eRpS]][rep][0],player.tReady)
+    print("Current exercise: %s" % player.arrExer[diff][iexer][0])
+    player.ex_start(player.arrExer[diff][iexer][0],player.tReady)
 
     # split exercise
-    if (int(player.arrExer[player.eDifficulty[rep%player.eRpS]][rep][1])):
-      player.splitexercise(player.tRepTimes[rep%player.eRpS])
+    if (int(player.arrExer[diff][iexer][1])):
+      player.splitexercise(player.tRepTimes[player.counter[diff]%player.eRpS])
     # normal exercise
     else:
-      player.exercise(player.tRepTimes[rep%player.eRpS])
+      player.exercise(player.tRepTimes[player.counter[diff]%player.eRpS])
 
     # last interval
     if ((j+1)==player.nInt):
@@ -62,13 +72,13 @@ for j in range(player.nInt):
       player.ex_next("break time")
     # next is exercise
     else:
-      print("Next exercise: %s" % player.arrExer[player.eDifficulty[(rep+1)%player.eRpS]][rep+1][0]) 
-      player.ex_next(player.arrExer[player.eDifficulty[(rep+1)%player.eRpS]][rep+1][0])
+      print("Next exercise: %s" % player.arrExer[nextdiff][inextexer][0]) 
+      player.ex_next(player.arrExer[nextdiff][inextexer][0])
 
     player.ex_countdown()
 
-    rep += 1
+  player.counter[diff] += 1
 
 print("Exercise complete.")
-player.play_mp3("congratulations abdominal exercises completed")
+player.play_mp3("congratulations %s exercises completed" % player.eMode)
 

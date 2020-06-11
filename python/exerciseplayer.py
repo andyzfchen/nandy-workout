@@ -14,7 +14,6 @@ def main():
   player = ExercisePlayer(args.conf)
 
   player.randomizeExercise()
-  print(player.arrExer)
 
 
 class ExercisePlayer(object):
@@ -24,6 +23,7 @@ class ExercisePlayer(object):
     self.config = configparser.ConfigParser()
     self.config.read("./conf/%s" % fConf)
 
+    # conf settings
     self.tTotal       = float(self.config["Time"]["Total"])
     self.tReady       = int(self.config["Time"]["Ready"])
     self.tRep         = int(self.config["Time"]["Rep"])
@@ -31,22 +31,36 @@ class ExercisePlayer(object):
     self.tBreak       = int(self.config["Time"]["Break"])
 
     self.eMode        = self.config["Exercise"]["Mode"]
-    #self.eRpS         = int(self.config["Exercise"]["RpS"])
     self.eRpS         = len(self.tRepTimes)
+    self.eIpS         = self.eRpS + 1
     self.eDifficulty  = list(map(int,(self.config["Exercise"]["Difficulty"]).split(":")))
     self.eCSV         = self.config["Exercise"]["CSV"]
 
-    temp              = np.genfromtxt("../resources/%s" % self.eCSV, dtype=str, delimiter=',')
-    self.arrExer      = [[x for x in temp if int(x[2])==0],[x for x in temp if int(x[2])==1]]
+    # other settings
+    exercises         = np.genfromtxt("../resources/%s" % self.eCSV, dtype=str, delimiter=',')
+    self.arrExer      = [[x for x in exercises if int(x[2])==0],[x for x in exercises if int(x[2])==1]]
 
-    self.nTotal       = np.shape(self.arrExer)
-    #self.nInt         = int(self.tTotal*2)
-    self.nInt         = int(self.config["Exercise"]["nInt"])
+    self.tIntTimes    = self.tRepTimes.copy()
+    self.nTotal       = len(self.arrExer[0]) + len(self.arrExer[1])
+    self.nDiff        = [len(self.arrExer[0]),len(self.arrExer[1]),0]
     self.nRep         = int(self.tTotal*2 - (self.tTotal*2)//(self.eRpS+1))
+    self.nInt         = 0
+    self.counter      = [0,0,0]
 
-    print("Total possible exercises: %d" % self.nTotal)
+    self.tIntTimes.append(self.tBreak)
+    self.eDifficulty.append(2)
 
+    # calculate nInt
+    time = 0.  # sec
+    i = 0
+    while (self.tTotal*60 - time > 0.01):
+      time += self.tIntTimes[i%self.eIpS]
+      i += 1
+      self.nInt += 1
+ 
+    print("Total unique exercises: %d" % self.nTotal)
     print("Total session exercises: %d" % self.nRep)
+    print("Total session intervals: %d" % self.nInt)
 
   def randomizeExercise(self):
     """ randomizes the exercise name array """
@@ -137,6 +151,14 @@ class ExercisePlayer(object):
     """ breaktime event """
     self.play_mp3("take a %d second break" % (t_event))
     time.sleep(t_event-10)
+
+  def resetCounter(self):
+    """ reset player counter """
+    self.counter = 0
+
+  def next(self):
+    """ set next exercise """
+    self.counter += 1
 
 
 if __name__ == "__main__":
