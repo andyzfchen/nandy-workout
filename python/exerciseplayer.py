@@ -6,6 +6,17 @@ import csv
 import argparse
 import configparser
 
+def main():
+  parser = argparse.ArgumentParser(description="Process exercise configuration.")
+  parser.add_argument("-c","--conf",type=str, default="default_abdominal.conf", help="Configuration file name.")
+  args = parser.parse_args()
+
+  player = ExercisePlayer(args.conf)
+
+  player.randomizeExercise()
+  print(player.arrExer)
+
+
 class ExercisePlayer(object):
   """ Player object that stores and outputs exercise sequences. """
 
@@ -28,9 +39,10 @@ class ExercisePlayer(object):
     temp              = np.genfromtxt("../resources/%s" % self.eCSV, dtype=str, delimiter=',')
     self.arrExer      = [[x for x in temp if int(x[2])==0],[x for x in temp if int(x[2])==1]]
 
-    self.nTotal   = np.shape(self.arrExer)
-    self.nInt     = int(self.tTotal*2)
-    self.nRep     = int(self.tTotal*2 - (self.tTotal*2)//(self.eRpS+1))
+    self.nTotal       = np.shape(self.arrExer)
+    #self.nInt         = int(self.tTotal*2)
+    self.nInt         = int(self.config["Exercise"]["nInt"])
+    self.nRep         = int(self.tTotal*2 - (self.tTotal*2)//(self.eRpS+1))
 
     print("Total possible exercises: %d" % self.nTotal)
 
@@ -127,4 +139,5 @@ class ExercisePlayer(object):
     time.sleep(t_event-10)
 
 
-
+if __name__ == "__main__":
+  main()

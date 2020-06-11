@@ -4,6 +4,7 @@
 
 # python
 python/mp3_cache
+__pycache__
 
 # React-native
 abs_mobile/node_modules
