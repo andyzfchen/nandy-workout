@@ -42,8 +42,8 @@ class ExercisePlayer(object):
 
     self.tIntTimes    = self.tRepTimes.copy()
     self.nTotal       = len(self.arrExer[0]) + len(self.arrExer[1])
-    self.nDiff        = [len(self.arrExer[0]),len(self.arrExer[1]),0]
-    self.nRep         = int(self.tTotal*2 - (self.tTotal*2)//(self.eRpS+1))
+    self.nDiff        = [len(self.arrExer[0]),len(self.arrExer[1]),1]
+    #self.nRep         = int(self.tTotal*2 - (self.tTotal*2)//(self.eRpS+1))
     self.nInt         = 0
     self.counter      = [0,0,0]
 
@@ -59,7 +59,7 @@ class ExercisePlayer(object):
       self.nInt += 1
  
     print("Total unique exercises: %d" % self.nTotal)
-    print("Total session exercises: %d" % self.nRep)
+    #print("Total session exercises: %d" % self.nRep)
     print("Total session intervals: %d" % self.nInt)
 
   def randomizeExercise(self):
@@ -140,6 +140,7 @@ class ExercisePlayer(object):
     self.play_mp3("begin")
     time.sleep(t_event/2.)
 
+    print("Switch sides")
     self.play_mp3("switch sides")
     time.sleep(5)
 

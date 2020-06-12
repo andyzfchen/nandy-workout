@@ -30,12 +30,12 @@ for j in range(player.nInt):
   iexer = player.counter[diff]%player.nDiff[diff]
   player.counter[diff] += 1
   nextdiff = player.eDifficulty[(j+1)%player.eIpS]
-  inextexer = player.counter[nextdiff]%player.nDiff[diff]
+  inextexer = player.counter[nextdiff]%player.nDiff[nextdiff]
   player.counter[diff] -= 1
-  print(diff)
-  print(iexer)
-  print(nextdiff)
-  print(inextexer)
+  print("current diff: %d" % diff)
+  print("current index: %d" % iexer)
+  print("next diff: %d" % nextdiff)
+  print("next index: %d" % inextexer)
 
   # breaktime
   if ((j%(player.eRpS+1))==player.eRpS):
@@ -57,10 +57,10 @@ for j in range(player.nInt):
 
     # split exercise
     if (int(player.arrExer[diff][iexer][1])):
-      player.splitexercise(player.tRepTimes[player.counter[diff]%player.eRpS])
+      player.splitexercise(player.tRepTimes[j%player.eIpS])
     # normal exercise
     else:
-      player.exercise(player.tRepTimes[player.counter[diff]%player.eRpS])
+      player.exercise(player.tRepTimes[j%player.eIpS])
 
     # last interval
     if ((j+1)==player.nInt):
