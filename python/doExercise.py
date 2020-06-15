@@ -77,7 +77,7 @@ for j in range(player.nInt):
 
     player.ex_countdown()
 
-  player.next(diff) += 1
+  player.next(diff)
 
 print("Exercise complete.")
 player.play_mp3("congratulations %s exercises completed" % player.eMode)

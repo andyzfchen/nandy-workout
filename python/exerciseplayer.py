@@ -50,7 +50,7 @@ class ExercisePlayer(object):
     time              = 0.  # sec
     self.nInt         = 0
     while (self.tTotal*60 - time > 0.01):
-      time += self.tIntTimes[i%self.eIpS]
+      time += self.tIntTimes[self.nInt%self.eIpS]
       self.nInt += 1
  
     print("Total unique easy exercises: %d" % self.nDiff[0])
