@@ -12,7 +12,6 @@ def main():
   args = parser.parse_args()
 
   player = ExercisePlayer(args.conf)
-
   player.randomizeExercise()
 
 
@@ -23,43 +22,39 @@ class ExercisePlayer(object):
     self.config = configparser.ConfigParser()
     self.config.read("./conf/%s" % fConf)
 
-    # conf settings
+    # time settings
     self.tTotal       = float(self.config["Time"]["Total"])
     self.tReady       = int(self.config["Time"]["Ready"])
     self.tRep         = int(self.config["Time"]["Rep"])
     self.tRepTimes    = list(map(int,(self.config["Time"]["RepTimes"]).split(":")))
     self.tBreak       = int(self.config["Time"]["Break"])
 
+    # exercise settings
     self.eMode        = self.config["Exercise"]["Mode"]
-    self.eRpS         = len(self.tRepTimes)
-    self.eIpS         = self.eRpS + 1
+    self.eIpS         = len(self.tRepTimes) + 1
     self.eDifficulty  = list(map(int,(self.config["Exercise"]["Difficulty"]).split(":")))
     self.eCSV         = self.config["Exercise"]["CSV"]
 
     # other settings
-    exercises         = np.genfromtxt("../resources/%s" % self.eCSV, dtype=str, delimiter=',')
+    exercises         = np.genfromtxt("./resources/%s" % self.eCSV, dtype=str, delimiter=',')
     self.arrExer      = [[x for x in exercises if int(x[2])==0],[x for x in exercises if int(x[2])==1]]
 
     self.tIntTimes    = self.tRepTimes.copy()
-    self.nTotal       = len(self.arrExer[0]) + len(self.arrExer[1])
     self.nDiff        = [len(self.arrExer[0]),len(self.arrExer[1]),1]
-    #self.nRep         = int(self.tTotal*2 - (self.tTotal*2)//(self.eRpS+1))
-    self.nInt         = 0
     self.counter      = [0,0,0]
 
     self.tIntTimes.append(self.tBreak)
     self.eDifficulty.append(2)
 
     # calculate nInt
-    time = 0.  # sec
-    i = 0
+    time              = 0.  # sec
+    self.nInt         = 0
     while (self.tTotal*60 - time > 0.01):
       time += self.tIntTimes[i%self.eIpS]
-      i += 1
       self.nInt += 1
  
-    print("Total unique exercises: %d" % self.nTotal)
-    #print("Total session exercises: %d" % self.nRep)
+    print("Total unique easy exercises: %d" % self.nDiff[0])
+    print("Total unique hard exercises: %d" % self.nDiff[1])
     print("Total session intervals: %d" % self.nInt)
 
   def randomizeExercise(self):
@@ -157,9 +152,9 @@ class ExercisePlayer(object):
     """ reset player counter """
     self.counter = 0
 
-  def next(self):
+  def next(self, diff):
     """ set next exercise """
-    self.counter += 1
+    self.counter[diff] += 1
 
 
 if __name__ == "__main__":
